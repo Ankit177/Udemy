@@ -7,7 +7,7 @@
           <p class="fa fa-envelope fa-1x badge" style="padding:0px;line-height: 5px;"></p>
           <span *ngIf="msgNum > 0 " class="nav-label-icon">{{msgNum}}</span>
           <ul id='dropdown1' class='dropdown-content col s12 collection'>
-            <li class="collection-item avatar" *ngFor="let chat of chatList" [routerLink]="['/chat',chat.receiverId.username]">
+            <li class="collection-item avatar" *ngFor="let chat of chatList" (click)="goToChatPage(chat.receiverId.username)">
               <img src="http://placehold.it/50x50" class="circle">
               <span class="title">
                 {{chat.receiverId.username}}
@@ -17,7 +17,8 @@
               </span>
               <p>
                 {{chat.msgId.message[chat.msgId.message.length-1].messageBody}}
-                <a class="secondary-content" *ngIf="!chat.msgId.message[chat.msgId.message.length-1].isRead">
+                <a class="secondary-content" *ngIf="!chat.msgId.message[chat.msgId.message.length-1].isRead
+                 && chat.receiverId.username !==chat.msgId.message[chat.msgId.message.length-1].receivername ">
                   <i class="material-icons">brightness_1</i>
                 </a>
                 <a class="secondary-content" *ngIf="chat.msgId.message[chat.msgId.message.length-1].isRead">
