@@ -28,6 +28,8 @@ export class ToolbarComponent implements OnInit {
   }
   user: any;
   ngOnInit() {
+    this.user = this.tokenservice.getPayLoad();
+
     const dropdownElement = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(dropdownElement, {
       alignment: 'right',
@@ -40,8 +42,13 @@ export class ToolbarComponent implements OnInit {
       hover: true,
       coverTrigger: false
     });
-    this.user = this.tokenservice.getPayLoad();
+
+    this.socket.emit('online', {
+      room: 'global',
+      user: this.user.username
+    });
     this.getUser();
+
     this.socket.on('refreshPage', () => {
       this.getUser();
     });
@@ -102,6 +109,14 @@ export class ToolbarComponent implements OnInit {
     this.router.navigate(['chat', name]);
     this.msgService.MarkMessages(this.user.username, name).subscribe(data => {
       console.log(data);
+      this.socket.emit('refresh', {});
+    });
+  }
+  markAllMessages() {
+    this.msgService.MarkAllMessages().subscribe(data => {
+      console.log(data);
+      this.socket.emit('refresh', {});
+      this.msgNum = 0;
     });
   }
 }
