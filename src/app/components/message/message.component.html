@@ -9,7 +9,9 @@
           <div class="row">
             <div class="col s10 nameCol">
               <span>{{receiver}}</span>
-              <p class="isOnline">Online</p>
+              <p *ngIf="isOnline === true" class="isOnline">Online</p>
+              <p *ngIf="isOnline === false" class="isOnline">Offline</p>
+
             </div>
           </div>
         </div>

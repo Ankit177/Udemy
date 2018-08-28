@@ -6,6 +6,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit, AfterViewInit {
+  onlineUser = [];
   tabElement: any;
   constructor() {}
 
@@ -14,5 +15,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     this.tabElement.style.display = 'none';
+  }
+  online(event) {
+    this.onlineUser = event;
   }
 }

@@ -1,17 +1,21 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TokenService } from '../../services/token.service';
 import { MessageService } from '../../services/message.service';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import io from 'socket.io-client';
 import { CaretEvent, EmojiEvent } from 'ng2-emoji-picker';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css']
 })
-export class MessageComponent implements OnInit, AfterViewInit {
+export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
+  @Input()
+  users: any;
+  online_users = [];
   socket: any;
   receiver: string;
   receiverData: any;
@@ -22,6 +26,7 @@ export class MessageComponent implements OnInit, AfterViewInit {
   typing = false;
   public eventMock;
   public eventPosMock;
+  isOnline = false;
 
   public direction =
     Math.random() > 0.5 ? (Math.random() > 0.5 ? 'top' : 'bottom') : Math.random() > 0.5 ? 'right' : 'left';
@@ -47,6 +52,7 @@ export class MessageComponent implements OnInit, AfterViewInit {
         this.getUserByUsername(this.receiver);
       });
     });
+
     this.socket.on('isTyping', data => {
       if (data.sender === this.receiver) {
         this.typing = true;
@@ -67,6 +73,16 @@ export class MessageComponent implements OnInit, AfterViewInit {
     console.log(params);
 
     this.socket.emit('join chat', params);
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.users.currentValue.length > 0) {
+      const result = _.indexOf(changes.users.currentValue, this.receiver);
+      if (result > -1) {
+        this.isOnline = true;
+      } else {
+        this.isOnline = false;
+      }
+    }
   }
   getUserByUsername(name) {
     this.userService.getUserByName(name).subscribe(data => {
