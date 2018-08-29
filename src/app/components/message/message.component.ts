@@ -40,7 +40,7 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
     private route: ActivatedRoute,
     private userService: UsersService
   ) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://chat-app-backend-cyowohpgjb.now.sh');
   }
 
   ngOnInit() {

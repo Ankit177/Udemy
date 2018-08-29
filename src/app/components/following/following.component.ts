@@ -13,7 +13,7 @@ export class FollowingComponent implements OnInit {
   following = [];
   user: any;
   constructor(private tokenService: TokenService, private userService: UsersService) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://chat-app-backend-cyowohpgjb.now.sh');
   }
 
   ngOnInit() {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const BASE_URL = 'http://localhost:3000/api/chatapp';
+const BASE_URL = 'https://chat-app-backend-cyowohpgjb.now.sh/api/chatapp';
 
 @Injectable({
   providedIn: 'root'

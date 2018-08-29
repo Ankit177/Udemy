@@ -18,7 +18,7 @@ export class CommentsComponent implements OnInit, AfterViewInit {
   toolbarElement: any;
   postId: any;
   constructor(private fb: FormBuilder, private postService: PostService, private route: ActivatedRoute) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://chat-app-backend-cyowohpgjb.now.sh');
   }
 
   ngOnInit() {

@@ -26,7 +26,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
     private userService: UsersService,
     private msgService: MessageService
   ) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://chat-app-backend-cyowohpgjb.now.sh');
   }
   user: any;
   ngOnInit() {

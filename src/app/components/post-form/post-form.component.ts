@@ -12,7 +12,7 @@ export class PostFormComponent implements OnInit {
   socket: any;
   postForm: FormGroup;
   constructor(private fb: FormBuilder, private postService: PostService) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://chat-app-backend-cyowohpgjb.now.sh');
   }
 
   ngOnInit() {

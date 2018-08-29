@@ -16,7 +16,7 @@ export class PostsComponent implements OnInit {
   user: any;
   posts = [];
   constructor(private postService: PostService, private tokenService: TokenService, private router: Router) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://chat-app-backend-cyowohpgjb.now.sh');
   }
 
   ngOnInit() {

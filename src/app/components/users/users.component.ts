@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit {
   loggedinUser: any;
   onlineLineUser = [];
   constructor(private userService: UsersService, private tokenService: TokenService) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://chat-app-backend-cyowohpgjb.now.sh');
   }
 
   ngOnInit() {
